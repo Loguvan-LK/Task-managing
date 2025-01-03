@@ -9,7 +9,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { loginUser } from '@/redux/authService';
 
 export default function LoginForm() {
-  const [email, setEmail] = useState<string>('');
+  const [username, setUsername] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [error, setError] = useState<string>('');
   const navigate = useNavigate();
@@ -18,7 +18,7 @@ export default function LoginForm() {
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const { token, user } = await loginUser(email, password);
+      const { token, user } = await loginUser(username, password);
       dispatch(login({ token, user }));
 
       // Redirect based on user role
@@ -39,13 +39,13 @@ export default function LoginForm() {
         <form onSubmit={handleLogin} className="space-y-4">
           {error && <p className="text-red-500 text-center">{error}</p>}
           <div>
-            <Label htmlFor="email">Email</Label>
+            <Label htmlFor="username">Username</Label>
             <Input
               type="text"
-              id="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="Enter your email"
+              id="username"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              placeholder="Enter your Username"
             />
           </div>
           <div>

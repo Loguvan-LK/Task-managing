@@ -18,13 +18,13 @@ export default function AppRoutes() {
         path="/"
         element={
           <RestrictedRoute>
-            {/* <LoginForm /> */}
-            <div className="grid grid-cols-1 justify-content-center">
+            <LoginForm />
+            {/* <div className="grid grid-cols-1 justify-content-center">
               <div className="flex items-center justify-center">
 
             <AuthenticationPage/>
               </div>
-            </div>
+            </div> */}
           </RestrictedRoute>
         }
       /><Route
