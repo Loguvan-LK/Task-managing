@@ -8,10 +8,10 @@ import { BrowserRouter } from "react-router-dom";
 
 export default function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
     <Provider store={store}>
       <ThemeProvider>
-      <div className="h-screen bg-gray-100 dark:bg-zinc-950 overflow-hidden">
+      <div className="h-screen bg-gray-100 dark:bg-zinc-950">
   <header className="flex justify-end items-center p-4">
      <div className="flex items-center space-x-4">
       <LogoutButton />
@@ -19,7 +19,7 @@ export default function App() {
     </div>
   </header>
 
-  <main className="overflow-hidden">
+  <main >
     <AppRoutes />
   </main>
 </div>

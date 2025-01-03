@@ -1,39 +1,29 @@
-import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-
-interface User {
-  role: string;
-  userRole: string;
-  username: string;
-}
+import { useState } from "react";
+import UserManagement from "./UserManagement";
+import TaskAssignment from "./TaskAssignment";
+import UserTasks from "./UserTasks"; // New component for displaying user tasks
 
 export default function AdminDashboard() {
-  const [user, setUser] = useState<User | null>(null);
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-    const userRole = localStorage.getItem("userRole");
-    const username = localStorage.getItem("username");
-
-    if (!token || userRole !== "Admin" || !username) {
-      navigate("/login");
-    } else {
-      setUser({
-        role: "Admin",
-        userRole: userRole!,
-        username: username!,
-      });
-    }
-  }, [navigate]);
+  const [selectedUserId, setSelectedUserId] = useState<number | null>(null);
 
   return (
-    <div>
-      <h1>Admin Dashboard</h1>
-      {user && (
+    <div className="p-6 space-y-6">
+      <h1 className="text-2xl font-bold">Admin Dashboard</h1>
+
+      <div>
+        <h2 className="text-xl font-semibold mb-4">Manage Users</h2>
+        <UserManagement setSelectedUserId={setSelectedUserId} />
+      </div>
+
+      <div>
+        <h2 className="text-xl font-semibold mb-4">Assign Tasks</h2>
+        <TaskAssignment />
+      </div>
+
+      {selectedUserId && (
         <div>
-          <p>Welcome, {user.username}</p>
-          {/* Additional admin-related content */}
+          <h2 className="text-xl font-semibold mb-4">User's Tasks</h2>
+          <UserTasks userId={selectedUserId} />
         </div>
       )}
     </div>
